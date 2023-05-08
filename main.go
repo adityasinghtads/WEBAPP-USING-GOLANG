@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"net/http"
 )
 
@@ -9,19 +10,20 @@ const portNumber = ":8080"
 
 // Home page handler
 func Home(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "This is Home Page")
+	renderTemplate(w, "home.page.html")
 }
 
 // About page handler
 func About(w http.ResponseWriter, r *http.Request) {
-	sum := addValues(2, 2)
-	_, _ = fmt.Fprintf(w, fmt.Sprintf("This is about page and 2+2 is %d", sum))
-	//fmt.Fprintf(w, "This is about page")
+	renderTemplate(w, "about.page.html")
 }
 
-// AddValues function, takes 2 Int and returns sum.
-func addValues(x, y int) int {
-	return x + y
+func renderTemplate(w http.ResponseWriter, tmpl string) {
+	parsedTemp, _ := template.ParseFiles("./templates/" + tmpl)
+	err := parsedTemp.Execute(w, nil)
+	if err != nil {
+		fmt.Println("error in parsed template ", err)
+	}
 }
 
 // the main application function.
