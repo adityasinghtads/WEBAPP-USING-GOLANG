@@ -17,6 +17,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 func About(w http.ResponseWriter, r *http.Request) {
 	sum := addValues(2, 2)
 	_, _ = fmt.Fprintf(w, fmt.Sprintf("This is about page and 2+2 is %d", sum))
+
 	//fmt.Fprintf(w, "This is about page")
 }
 
