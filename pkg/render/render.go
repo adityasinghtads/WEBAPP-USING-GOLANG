@@ -12,4 +12,5 @@ func RenderTemplate(w http.ResponseWriter, tmpl string) {
 	if err != nil {
 		fmt.Println("error in parsed template ", err)
 	}
+	//fmt.Println("Hey hello")
 }
